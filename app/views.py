@@ -35,8 +35,7 @@ def update_video(id_video):
     video = Video.get_by_video(id_video)
     if not video:
         return jsonify({"message": "Video no encontrado"}), 404
-    data = request.json
-    print(f"Datos recibidos para actualización: {data}")
+    data = request.json   
     video.titulo = data.get("titulo", video.titulo)
     video.genero = data.get("genero", video.genero)
     video.grupo = data.get("grupo", video.grupo)

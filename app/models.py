@@ -39,13 +39,11 @@ class Video:
     #realiza insert/update en la BD
 
 
-    def save(self):
-        print("entrooooooooooooooo")
+    def save(self):        
         db = get_db()
         cursor = db.cursor()
         
-        if self.id_video:
-            print("esto es el if de update")
+        if self.id_video:            
             query = """ UPDATE videos SET titulo= %s, genero= %s, grupo= %s, anio= %s WHERE id_video = %s """
             cursor.execute(query, (self.titulo, self.genero, self.grupo, self.anio, self.id_video))
             db.commit()
