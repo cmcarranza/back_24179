@@ -6,23 +6,20 @@ def index():
     response = {"mensagge": "Hola mundo desde API Flask 👽"}
     return jsonify(response)
 
-#funcion que busca un video por id
-def get_video(id_video):
-    db = get_db()
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM videos WHERE id_video = %s", (id_video))
-    row = cursor.fetchone()
-    cursor.close()
-    if row:
-        return Video(id_video=row[0],titulo=row[1],genero=row[2],grupo=row[3],anio=row[4])
-    return None
-
 
 #funcion que busca listado de videos
 def get_all_video():
     videos = Video.get_all()
     list_videos = [videos.serialize() for videos in videos]
     return jsonify(list_videos)
+
+
+#funcion que busca un video
+def get_video(id_video):
+    video = Video.get_by_video(id_video)
+    if not video:
+        return jsonify({"mensagge": "Video no encontrado"}), 404
+    return jsonify(video.serialize())
 
 #crear nuevo video
 def create_video():
@@ -37,21 +34,19 @@ def create_video():
 def update_video(id_video):
     video = Video.get_by_video(id_video)
     if not video:
-        return jsonify({"menssage": "Video no encontrado"}),404
+        return jsonify({"message": "Video no encontrado"}), 404
     data = request.json
-    video.titulo = data["titulo"]
-    video.genero = data["genero"]
-    video.grupo = data["grupo"]
-    video.anio = data["anio"]
+    video.titulo = data.get("titulo", video.titulo)
+    video.genero = data.get("genero", video.genero)
+    video.grupo = data.get("grupo", video.grupo)
+    video.anio = data.get("anio", video.anio)
     video.save()
-    return jsonify({"menssage": "Video actualizado exitosamente"})
-    
+    return jsonify({"message": "Video actualizado exitosamente"})
  
 #funcion que elimina un registro
 def delete_video(id_video):
     video = Video.get_by_video(id_video)
     if not video:
-        return jsonify({"menssage": "Video no encontrado"}),404
+        return jsonify({"message": "Video no encontrado"}), 404
     video.delete()
-    return jsonify({"menssage": "Video eliminado exitosamente"})
-
+    return jsonify({"message": "Video eliminado exitosamente"})
