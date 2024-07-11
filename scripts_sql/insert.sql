@@ -2,11 +2,11 @@ USE api_videos;
 
 -- Rock Internacional
 INSERT INTO videos (titulo, genero, grupo, anio) VALUES
-('Bohemian Rhapsody', 'Rock', 'Queen', '1975-10-31'),
-('Stairway to Heaven', 'Rock', 'Led Zeppelin', '1971-11-08'),
-('Imagine', 'Rock', 'John Lennon', '1971-10-11'),
-('Smells Like Teen Spirit', 'Rock', 'Nirvana', '1991-09-10'),
-('Hotel California', 'Rock', 'Eagles', '1977-02-22');
+('Bohemian Rhapsody', 'Rock Internacional', 'Queen', '1975-10-31'),
+('Stairway to Heaven', 'Rock Internacional', 'Led Zeppelin', '1971-11-08'),
+('Imagine', 'Rock Internacional', 'John Lennon', '1971-10-11'),
+('Smells Like Teen Spirit', 'Rock Internacional', 'Nirvana', '1991-09-10'),
+('Hotel California', 'Rock Internacional', 'Eagles', '1977-02-22');
 
 -- Rock Nacional Argentino
 INSERT INTO videos (titulo, genero, grupo, anio) VALUES

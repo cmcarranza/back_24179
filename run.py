@@ -17,7 +17,5 @@ app.route("/api/videos/<int:id_video>", methods=["PUT"])(update_video)#actualiza
 app.route("/api/videos/<int:id_video>", methods=["DELETE"])(delete_video)#elimina un registro
 
 
-
-
 if __name__ == "__main__":
     app.run(debug=True)
