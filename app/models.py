@@ -37,23 +37,30 @@ class Video:
         return videos
 
     #realiza insert/update en la BD
-  
-  
-    
+
+
     def save(self):
+        print("entrooooooooooooooo")
         db = get_db()
         cursor = db.cursor()
+        
         if self.id_video:
-            query=""" UPDATE videos SET titulo= %s, genero= %s, grupo= %s, anio= %s""",(self.titulo,self.genero,self.grupo,self.anio)
-            cursor.execute(query)
+            print("esto es el if de update")
+            query = """ UPDATE videos SET titulo= %s, genero= %s, grupo= %s, anio= %s WHERE id_video = %s """
+            cursor.execute(query, (self.titulo, self.genero, self.grupo, self.anio, self.id_video))
+            db.commit()
+            
         else:
             cursor.execute(""" INSERT INTO videos (titulo, genero, grupo, anio) VALUES (%s,%s,%s,%s)""",
-                           (self.titulo,self.genero,self.grupo,self.anio))
-            self.id_video= cursor.lastrowid
-        db.commit()
+                       (self.titulo, self.genero, self.grupo, self.anio))
+            self.id_video = cursor.lastrowid
+            db.commit()
         cursor.close()
-   
-    #para la lista de videos
+  
+    
+
+
+    #Convierte el objeto Video a un diccionario para su fácil serialización a JSON
     def serialize(self):
         return {
             "id_video": self.id_video,
@@ -63,7 +70,7 @@ class Video:
             "anio": self.anio
         }
 
-    #elimina un video usando id_video
+    #elimina un video usando su id
     def delete(self):
         db = get_db()
         cursor = db.cursor()

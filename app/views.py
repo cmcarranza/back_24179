@@ -36,12 +36,16 @@ def update_video(id_video):
     if not video:
         return jsonify({"message": "Video no encontrado"}), 404
     data = request.json
+    print(f"Datos recibidos para actualización: {data}")
     video.titulo = data.get("titulo", video.titulo)
     video.genero = data.get("genero", video.genero)
     video.grupo = data.get("grupo", video.grupo)
     video.anio = data.get("anio", video.anio)
-    video.save()
+
+    video.save()    
     return jsonify({"message": "Video actualizado exitosamente"})
+    
+    
  
 #funcion que elimina un registro
 def delete_video(id_video):

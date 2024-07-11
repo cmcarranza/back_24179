@@ -19,7 +19,7 @@ def get_db():
     # Si 'db' no está en el contexto global de Flask 'g'
     if 'db' not in g:
         # Crear una nueva conexión a la base de datos y guardarla en 'g'
-        g.db = mysql.connector.connect(**DATABASE_CONFIG)
+        g.db = mysql.connector.connect(**DATABASE_CONFIG,autocommit=False)
     # Retornar la conexión a la base de dato
     return g.db
 
